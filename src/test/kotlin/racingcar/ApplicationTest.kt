@@ -74,6 +74,19 @@ class ApplicationTest : NsTest() {
     }
 
     @Test
+    fun `Executes the race for the exact number of input rounds`() {
+        assertRandomNumberInRangeTest({
+            run("pobi, woni", "1")
+            val outputText = output()
+            val count = countOccurrences(outputText, "pobi")
+            assertThat(count).isEqualTo(1)
+        },
+            // TODO: implement fixture(random number generator) for control winner easily
+            STOP, MOVING_FORWARD,
+        )
+    }
+
+    @Test
     fun `Should throws if number of rounds is not a number`() {
         assertSimpleTest() {
             assertThrows<IllegalArgumentException> {
@@ -89,6 +102,10 @@ class ApplicationTest : NsTest() {
                 run("pobi,javaji", "-1")
             }
         }
+    }
+
+    private fun countOccurrences(text: String, keyword: String): Int {
+        return Regex(Regex.escape(keyword)).findAll(text).count()
     }
 
 
