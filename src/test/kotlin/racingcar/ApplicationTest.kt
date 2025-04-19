@@ -70,7 +70,7 @@ class ApplicationTest : NsTest() {
     @Test
     fun `Should throw exception when car name is duplicated`() {
         assertSimpleTest {
-            assertThrows<IllegalArgumentException> { runException("pobi,pobi", "1") }
+            assertThrows<IllegalArgumentException> { runException("p1,p1", "1") }
         }
     }
 
@@ -116,7 +116,7 @@ class ApplicationTest : NsTest() {
     fun `Should throws if number of rounds is not a number`() {
         assertSimpleTest() {
             assertThrows<IllegalArgumentException> {
-                run("pobi,javaji", "a")
+                run("p1,p2", "a")
             }
         }
     }
@@ -125,7 +125,7 @@ class ApplicationTest : NsTest() {
     fun `Should throws if number of rounds is not a positive number`() {
         assertSimpleTest() {
             assertThrows<IllegalArgumentException> {
-                run("pobi,javaji", "-1")
+                run("p1,p2", "-1")
             }
         }
     }
