@@ -6,32 +6,48 @@ import camp.nextstep.edu.missionutils.test.NsTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import racingcar.fixture.CarMovementFixtureBuilder
 
 class ApplicationTest : NsTest() {
     @Test
     fun `Should print prints the Collect winner`() {
+        // Given
+        val carNames = "p1, p2"
+        val roundCount = "3"
+        val (first, rest) = CarMovementFixtureBuilder()
+            .round(true, false)
+            .round(true, false)
+            .round(true, false)
+            .build()
+
+        // When & Then
         assertRandomNumberInRangeTest(
             {
-                run("pobi,woni", "1")
-                assertThat(output()).contains("pobi : -", "woni : ", "Winners : pobi")
+                run(carNames, roundCount)
+                assertThat(output()).contains("Winners : pobi")
             },
-            MOVING_FORWARD,
-            STOP,
+            first, *rest,
         )
     }
 
     @Test
     fun `Correctly prints multiple winners`() {
+        // Given
+        val carNames = "p1, p2"
+        val roundCount = "3"
+        val (first, rest) =CarMovementFixtureBuilder()
+            .round(true, true)
+            .build()
+
+        // When & Then
         assertRandomNumberInRangeTest(
             {
-                run("pobi,woni", "1")
-                assertThat(output()).contains("pobi : -", "woni : -", "Winners : pobi, woni")
+                run(carNames, roundCount)
+                assertThat(output()).contains("Winners : pobi, woni")
             },
-            MOVING_FORWARD,
-            MOVING_FORWARD,
+            first, *rest,
         )
     }
-
 
     @Test
     fun `Should throw exception when car names is empty`() {
@@ -75,14 +91,24 @@ class ApplicationTest : NsTest() {
 
     @Test
     fun `Executes the race for the exact number of input rounds`() {
+        // Given
+        val carNames = "pLose, pWin"
+        val roundCount = 2
+        val (first, rest) = CarMovementFixtureBuilder()
+            .round(false, true)
+            .round(false, true)
+            .build()
+
+        // When & Then
         assertRandomNumberInRangeTest({
-            run("pobi, woni", "1")
+            run(carNames, roundCount.toString())
+
             val outputText = output()
-            val count = countOccurrences(outputText, "pobi")
-            assertThat(count).isEqualTo(1)
+            val count = countOccurrences(outputText, "pLose")
+            // roundCount == loserPrintCount
+            assertThat(count).isEqualTo(roundCount)
         },
-            // TODO: implement fixture(random number generator) for control winner easily
-            STOP, MOVING_FORWARD,
+            first, *rest
         )
     }
 
