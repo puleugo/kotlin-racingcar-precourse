@@ -24,7 +24,7 @@ class ApplicationTest : NsTest() {
         assertRandomNumberInRangeTest(
             {
                 run(carNames, roundCount)
-                assertThat(output()).contains("Winners : pobi")
+                assertThat(output()).contains("Winners : p1")
             },
             first, *rest,
         )
@@ -43,7 +43,7 @@ class ApplicationTest : NsTest() {
         assertRandomNumberInRangeTest(
             {
                 run(carNames, roundCount)
-                assertThat(output()).contains("Winners : pobi, woni")
+                assertThat(output()).contains("Winners : p1, p2")
             },
             first, *rest,
         )
