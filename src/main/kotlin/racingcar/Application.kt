@@ -18,7 +18,7 @@ fun main() {
         val results = race(cars, roundCount)
         val winnersCarNames = results
             .getWinners().getCarNames()
-        println("Race Results\n"+results.toString()+"\nWinners : ${winnersCarNames.joinToString(", ")}")
+        println("Race Results\n"+results.toString()+"Winners : ${winnersCarNames.joinToString(", ")}")
 }
 
 fun race(cars: Cars, roundCount: Int): Rounds {
