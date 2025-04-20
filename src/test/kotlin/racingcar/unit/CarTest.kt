@@ -28,7 +28,7 @@ class CarTest {
         }
 
         @Test
-        fun `should throw exception if car name has space`() {
+        fun `should throw exception if car name contain space`() {
             val exception = assertThrows<IllegalArgumentException> {
                 Car("po bi")
             }
@@ -48,7 +48,7 @@ class CarTest {
     @DisplayName("moveRandomly()")
     inner class MoveRandomlyTest {
         @Test
-        fun `should move forward if random number greater or equal then 4`() {
+        fun `should move forward if random number greater than or equal to 4`() {
             val car = Car("pobi")
 
             assertRandomNumberInRangeTest({
